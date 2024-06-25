@@ -1,10 +1,10 @@
 # IMPORTADOR DE NFS-E MUNICIPAIS
 
-•	O que é?
+- O que é?
 
 É um aplicativo simples, intuitivo e adaptativo que visa a automação de tarefas maçantes, como diz o nome deste módulo, a importação de notas fiscais de serviço.
 
-•	Por que?
+- Por que?
 
 Para poupar tempo dos funcionários, assim poupando o dinheiro da empresa, uma tarefa que pode ser automatizada, deve ser automatizada.
 Em um teste prático foram colocados, no mesmo ambiente, uma pessoa e o sistema em seu momento atual, ainda sendo necessário digitar o CNPJ e senha da empresa selecionada, e os resultados foram os seguintes:
