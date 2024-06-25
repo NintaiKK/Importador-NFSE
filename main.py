@@ -9,6 +9,8 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import *
 from tkinter.ttk import *
+from openpyxl import Workbook
+from openpyxl import load_workbook
 
 janela = tk.Tk()
 janela.resizable(0,0)
@@ -59,24 +61,100 @@ def trabaio():
             EC.visibility_of_element_located((By.XPATH, '//*[@id="dataInicial"]'))
         )
 
-        element3.send_keys(diaI)
+        element3.click()
 
     except Exception as e:
         print(f"Erro ao clicar no elemento: {e}")
+
+    navegador.find_element('xpath', '//*[@id="dataInicial"]').send_keys(diaI)
+
+    navegador.find_element('xpath', '//*[@id="dataFinal"]').click()
 
     navegador.find_element('xpath', '//*[@id="dataFinal"]').send_keys(diaF)
 
     navegador.find_element('xpath', '//*[@id="btnExportarXml"]').click()
 
     try:
-        element3 = WebDriverWait(navegador, 10).until(
+        element4 = WebDriverWait(navegador, 10).until(
             EC.visibility_of_element_located((By.XPATH, '//*[@id="tblMeusRelatorios"]/tbody/tr/td[4]/div/a[1]'))
         )
 
-        element3.click()
+        element4.click()
 
     except Exception as e:
         print(f"Erro ao clicar no elemento: {e}")
+
+    try:
+        element11 = WebDriverWait(navegador, 10).until(
+            EC.visibility_of_element_located((By.XPATH, '//*[@id="btnFecharModalRelatoriosAssincronos"]'))
+        )
+
+        element11.click()
+
+    except Exception as e:
+        print(f"Erro ao clicar no elemento: {e}")
+
+    navegador.get("https://nfse.canoas.rs.gov.br/dmst/exportarNFSe")
+    
+    try:
+        element7 = WebDriverWait(navegador, 10).until(
+            EC.visibility_of_element_located((By.XPATH, '//*[@id="dataInicial"]'))
+        )
+
+        element7.click()
+
+    except Exception as e:
+        print(f"Erro ao clicar no elemento: {e}")
+
+    navegador.find_element('xpath', '//*[@id="dataInicial"]').send_keys(diaI)
+
+    navegador.find_element('xpath', '//*[@id="dataFinal"]').click()
+    navegador.find_element('xpath', '//*[@id="dataFinal"]').send_keys(diaF)
+
+    navegador.find_element('xpath', '//*[@id="btnAvancadoformPeriodo"]').click()
+    
+    try:
+        element13 = WebDriverWait(navegador, 10).until(
+            EC.visibility_of_element_located((By.XPATH, '//*[@id="tblNotas"]/tbody/tr/td[9]/div/div'))
+        )
+
+        valores = element13.text
+
+    except Exception as e:
+        print(f"Erro ao clicar no elemento: {e}")
+
+    try:
+        wb = load_workbook('Valores.xlsx')
+        
+    except FileNotFoundError:
+        wb = Workbook()
+
+    planilha = wb.active
+
+    planilha.append([valores])
+
+    wb.save('Valores.xlsx')
+
+    try:
+        element8 = WebDriverWait(navegador, 10).until(
+            EC.visibility_of_element_located((By.XPATH, '//*[@id="formato"]'))
+        )
+
+        element8.click()
+
+    except Exception as e:
+        print(f"Erro ao clicar no elemento: {e}")
+
+    try:
+        element9 = WebDriverWait(navegador, 10).until(
+            EC.visibility_of_element_located((By.XPATH, '//*[@id="formato"]/option[2]'))
+        )
+
+        element9.click()
+
+    except Exception as e:
+        print(f"Erro ao clicar no elemento: {e}")
+    #aqui da pau
 
     navegador.quit()
 
@@ -152,5 +230,3 @@ b.pack(side = LEFT)
 janela.mainloop()
 
                                   
-
-
